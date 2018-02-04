@@ -1,3 +1,5 @@
+to compile made "make" or "make re"
+
 for lunch the game use "./matchstick [the number of line] [the number of match]"
 
 exemple ./matchstik 6  3
