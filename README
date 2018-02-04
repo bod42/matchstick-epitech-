@@ -2,7 +2,7 @@ to compile made "make" or "make re"
 
 for lunch the game use "./matchstick [the number of line] [the number of match]"
 
-exemple ./matchstik 6  3
+example ./matchstik 6  3
 
 (the number of lines is limited between 2 and 99)
 
