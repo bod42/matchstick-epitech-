@@ -1,0 +1,7 @@
+for lunch the game use "./matchstick [the number of line] [the number of match]"
+
+exemple ./matchstik 6  3
+
+(the number of lines is limited between 2 and 99)
+
+the game is not over yet
