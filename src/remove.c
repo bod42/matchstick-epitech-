@@ -7,7 +7,7 @@
 
 #include "my_h.h"
 
-int find(char *str)
+int	find(char *str)
 {
 	int i = 1;
 	int size = my_strlen(str);
@@ -30,41 +30,41 @@ int find(char *str)
 	return (i);
 }
 
-void	remove_player(t_match Match)
+void	remove_player(t_match *Match)
 {
-	int find_stick = find(Match.tab[atoi(Match.getline)]);
-	int remove = atoi(Match.getmatches);
-	int line = atoi(Match.getline);
+	int find_stick = find(Match->tab[my_get_nbr(Match->getline)]);
+	int remove = my_get_nbr(Match->getmatches);
+	int line = my_get_nbr(Match->getline);
 
 	while (remove > 0) {
-		Match.tab[line][find_stick] = ' ';
+		Match->tab[line][find_stick] = ' ';
 		find_stick--;
 		remove--;
 	}
 }
 
-void    remove_AI(t_match Match)
+void	remove_AI(t_match *Match)
 {
-        int find_stick = find(Match.tab[Match.nbline_ai]);
-        int remove = Match.nbmatch_ai;
-        int line = Match.nbline_ai;
+	int find_stick = find(Match->tab[Match->nbline_ai]);
+	int remove = Match->nbmatch_ai;
+	int line = Match->nbline_ai;
 
-        while (remove > 0) {
-                Match.tab[line][find_stick] = ' ';
-                find_stick--;
-                remove--;
-        }
+	while (remove > 0) {
+		Match->tab[line][find_stick] = ' ';
+		find_stick--;
+		remove--;
+	}
 }
 
-int	finish(t_match Match)
+int	finish(t_match *Match)
 {
 	int y = 0;
 	int x = 0;
 
-	while (Match.tab[y] != NULL) {
+	while (Match->tab[y] != NULL) {
 		x = 0;
-		while (Match.tab[y][x] != '\0') {
-			if (Match.tab[y][x] == '|')
+		while (Match->tab[y][x] != '\0') {
+			if (Match->tab[y][x] == '|')
 				return (1);
 			x++;
 		}
@@ -73,14 +73,14 @@ int	finish(t_match Match)
 	return (0);
 }
 
-int	error(t_match Match)
+int	error(t_match *Match)
 {
 	int x = 0;
 
-	if (my_get_nbr(Match.getmatches) >  my_get_nbr(Match.av[2])) {
+	if (my_get_nbr(Match->getmatches) >  my_get_nbr(Match->av[2]) || my_get_nbr(Match->getmatches) <= 0) {
 		my_putstr("Error: you cannot remove more than ");
-		my_put_nbr(Match.nbmatch);
-		my_putstr(" matches per turn\n");
+		my_put_nbr(Match->nbmatch);
+		my_putstr(" matches per turn");
 		x = 1;
 	}
 	return (x);

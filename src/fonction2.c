@@ -20,3 +20,12 @@ int	my_put_nbr(int nb)
 	}
 	return (0);
 }
+
+char	*change_matches(char *str)
+{
+	int i = 0;
+	char *new_str = malloc(sizeof(char ) + 255);
+
+	new_str[i] = str[i + 2];
+	return (new_str);
+}

@@ -24,80 +24,76 @@ char	**malloc_arr(int lines, int cl)
 	return (tab);
 }
 
-char	**map(t_match Match)
+char	**map(t_match *Match)
 {
-	int nb = Match.nb;
+	int nb = Match->nb;
 	int x = 0;
 	int y;
 
-	Match. tab = malloc_arr(nb +3, nb * 2 + 2);
+	Match->tab = malloc_arr(nb +3, nb * 2 + 2);
 	while (x <= nb + 1) {
 		y = 0;
 		while (y <= nb * 2) {
-			Match.tab[0][y] = '*';
-			Match.tab[x][0] = '*';
-			Match.tab[x][y] = ' ';
-			Match.tab[nb + 1][y] = '*';
-			Match.tab[x][nb*2] = '*';
+			Match->tab[0][y] = '*';
+			Match->tab[x][0] = '*';
+			Match->tab[x][y] = ' ';
+			Match->tab[nb + 1][y] = '*';
+			Match->tab[x][nb*2] = '*';
 			y++;
 		}
 		x++;
-		Match.tab[x][y] = '\0';
+		Match->tab[x][y] = '\0';
 	}
-	Match.tab[x] = NULL;
-	return (Match.tab);
+	Match->tab[x] = NULL;
+	return (Match->tab);
 }
 
-char	**my_pipe(t_match Match)
+char	**my_pipe(t_match *Match)
 {
-  int	nb = Match.nb;
-  int	x = nb;
-  int	y = nb * 2;
+	int nb = Match->nb;
+	int x = nb;
+	int y = nb * 2;
 
-  Match.tab = map(Match);
-  while (x >= 1)
-    {
-      y--;
-      Match.tab[x][y] = '|';
-      x--;
-    }
-  return (Match.tab);
-}
-
-char	**my_pipe2(t_match Match)
-{
-  int	nb = Match.nb;
-  int	x = nb;
-  int	y = 1;
-
-  Match.tab = my_pipe(Match);
-  while (x >= 1)
-    {
-      Match.tab[x][y] = '|';
-      x--;
-      y++;
-    }
-  return (Match.tab);
-}
-
-char	**my_pipe3(t_match Match)
-{
-  int	x = 2;
-  int	y;
-
-  Match.tab = my_pipe2(Match);
-  while (Match.tab[x][3] != '*')
-    {
-      y = 1;
-      while (Match.tab[x][y] != '|')
-	y++;
-      y++;
-      while (Match.tab[x][y] == ' ')
-	{
-	  Match.tab[x][y] = '|';
-	  y++;
+	Match->tab = map(Match);
+	while (x >= 1) {
+		y--;
+		Match->tab[x][y] = '|';
+		x--;
 	}
-      x++;
-    }
-  return (Match.tab);
+	return (Match->tab);
+}
+
+char	**my_pipe2(t_match *Match)
+{
+	int nb = Match->nb;
+	int x = nb;
+	int y = 1;
+
+	Match->tab = my_pipe(Match);
+	while (x >= 1) {
+		Match->tab[x][y] = '|';
+		x--;
+		y++;
+	}
+	return (Match->tab);
+}
+
+char	**my_pipe3(t_match *Match)
+{
+	int x = 2;
+	int y;
+
+	Match->tab = my_pipe2(Match);
+	while (Match->tab[x][3] != '*') {
+		y = 1;
+		while (Match->tab[x][y] != '|')
+			y++;
+		y++;
+		while (Match->tab[x][y] == ' ') {
+			Match->tab[x][y] = '|';
+			y++;
+		}
+		x++;
+	}
+	return (Match->tab);
 }
